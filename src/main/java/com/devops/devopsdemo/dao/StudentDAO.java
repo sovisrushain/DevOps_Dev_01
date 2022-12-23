@@ -12,8 +12,8 @@ import java.util.Date;
 public class StudentDAO {
     private String nic;
     private String name;
-    private Date dob;
     private String gender;
+    private String dob;
     private int year;
     private String course;
 }
