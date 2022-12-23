@@ -11,5 +11,5 @@ public class StudentDTO {
     private String nic;
     private String name;
     private int year;
-    private CourseDTO[] courses;
+    private String course;
 }
