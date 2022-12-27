@@ -1,8 +1,5 @@
 package com.devops.devopsdemo.util;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,8 +21,6 @@ public class NicCalc {
         map.put("dob", year + " " + month + " " + date);
         map.put("gender", gender);
         return map;
-//        System.out.println("Date of birth : " + year + " " + month + " " + date);
-//        System.out.println("Gender : " + gender);
     }
 
     private static void oldNIC(String idNumber) {
