@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface StudentService {
     void saveStudent(StudentDTO studentDTO);
     Optional<StudentDAO> getStudentById(String nic);
+    void deleteStudent(String nic);
 }

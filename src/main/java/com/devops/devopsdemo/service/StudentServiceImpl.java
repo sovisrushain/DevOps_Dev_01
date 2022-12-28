@@ -27,12 +27,16 @@ public class StudentServiceImpl implements StudentService {
         studentDAO.setDob(map.get("dob"));
         studentDAO.setYear(studentDTO.getYear());
         studentDAO.setCourse(studentDTO.getCourse());
-
         studentRepository.save(studentDAO);
     }
 
     @Override
     public Optional<StudentDAO> getStudentById(String nic) {
         return studentRepository.findById(nic);
+    }
+
+    @Override
+    public void deleteStudent(String nic) {
+        studentRepository.deleteById(nic);
     }
 }

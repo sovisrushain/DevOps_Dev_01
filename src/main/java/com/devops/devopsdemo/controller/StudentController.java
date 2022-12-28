@@ -30,4 +30,10 @@ public class StudentController {
         logger.info("student controller class: get a student - {}", nic);
         return studentService.getStudentById(nic);
     }
+
+    @DeleteMapping("/{nic}")
+    public void deleteStudent(@PathVariable String nic) {
+        logger.info("student controller class: get a student - {}", nic);
+        studentService.deleteStudent(nic);
+    }
 }
