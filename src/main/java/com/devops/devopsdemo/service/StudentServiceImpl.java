@@ -7,6 +7,7 @@ import com.devops.devopsdemo.util.NicCalc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,5 +39,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudent(String nic) {
         studentRepository.deleteById(nic);
+    }
+
+    @Override
+    public Optional<List<StudentDAO>> getAllStudents() {
+        return Optional.of(studentRepository.findAll());
     }
 }

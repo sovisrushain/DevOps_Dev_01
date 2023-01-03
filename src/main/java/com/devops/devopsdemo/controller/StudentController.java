@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,6 +31,12 @@ public class  StudentController {
     public Optional<StudentDAO> getStudent(@PathVariable String nic) {
         logger.info("student controller class: get a student - {}", nic);
         return studentService.getStudentById(nic);
+    }
+
+    @GetMapping
+    public Optional<List<StudentDAO>> getAllStudents() {
+        logger.info("student controller class: get all students");
+        return studentService.getAllStudents();
     }
 
     @DeleteMapping("/{nic}")
