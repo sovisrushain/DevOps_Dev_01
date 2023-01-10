@@ -1,6 +1,7 @@
 package com.devops.devopsdemo.dao;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
 @Table(name = "students")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,3 +31,5 @@ public class StudentDAO {
     @Column(nullable = false)
     private String course;
 }
+
+

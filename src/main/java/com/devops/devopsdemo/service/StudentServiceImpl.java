@@ -21,15 +21,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String saveStudent(StudentDTO studentDTO) {
         Map<String, String> map = NicCalc.getDobAndGender(studentDTO.getNic());
-        StudentDAO studentDAO = new StudentDAO();
-        studentDAO.setNic(studentDTO.getNic());
-        studentDAO.setName(studentDTO.getName());
-        studentDAO.setGender(map.get("gender"));
-        studentDAO.setDob(map.get("dob"));
-        studentDAO.setYear(studentDTO.getYear());
-        studentDAO.setCourse(studentDTO.getCourse());
-        studentRepository.save(studentDAO);
-        return studentDAO.getNic();
+        StudentDAO student = StudentDAO.builder()
+                .nic(studentDTO.getNic())
+                .name(studentDTO.getName())
+                .gender(map.get("gender"))
+                .dob(map.get("dob"))
+                .year(studentDTO.getYear())
+                .course(studentDTO.getCourse())
+                .build();
+        studentRepository.save(student);
+        return student.getNic();
     }
 
     @Override
