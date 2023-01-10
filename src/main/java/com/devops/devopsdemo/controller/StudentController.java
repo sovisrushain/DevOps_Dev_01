@@ -6,6 +6,8 @@ import com.devops.devopsdemo.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,26 +24,30 @@ public class  StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public void saveStudent(@Valid @RequestBody  StudentDTO studentDTO) {
+    public ResponseEntity<String> saveStudent(@Valid @RequestBody  StudentDTO studentDTO) {
         logger.info("student controller class: post student - {}", studentDTO);
-        studentService.saveStudent(studentDTO);
+        String nic = studentService.saveStudent(studentDTO);
+        return new ResponseEntity<>(nic, HttpStatus.OK);
     }
 
     @GetMapping("/{nic}")
-    public Optional<StudentDAO> getStudent(@PathVariable String nic) {
+    public ResponseEntity<Optional<StudentDAO>> getStudent(@PathVariable String nic) {
         logger.info("student controller class: get a student - {}", nic);
-        return studentService.getStudentById(nic);
+        Optional<StudentDAO> student = studentService.getStudentById(nic);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping
-    public Optional<List<StudentDAO>> getAllStudents() {
+    public ResponseEntity<Optional<List<StudentDAO>>> getAllStudents() {
         logger.info("student controller class: get all students");
-        return studentService.getAllStudents();
+        Optional<List<StudentDAO>> studentList = studentService.getAllStudents();
+        return new ResponseEntity<>(studentList, HttpStatus.OK);
     }
 
     @DeleteMapping("/{nic}")
-    public void deleteStudent(@PathVariable String nic) {
+    public ResponseEntity<String> deleteStudent(@PathVariable String nic) {
         logger.info("student controller class: get a student - {}", nic);
-        studentService.deleteStudent(nic);
+        String nicNum = studentService.deleteStudent(nic);
+        return new ResponseEntity<>(nicNum, HttpStatus.OK);
     }
 }

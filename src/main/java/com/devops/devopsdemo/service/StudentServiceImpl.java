@@ -19,7 +19,7 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public void saveStudent(StudentDTO studentDTO) {
+    public String saveStudent(StudentDTO studentDTO) {
         Map<String, String> map = NicCalc.getDobAndGender(studentDTO.getNic());
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.setNic(studentDTO.getNic());
@@ -29,6 +29,7 @@ public class StudentServiceImpl implements StudentService {
         studentDAO.setYear(studentDTO.getYear());
         studentDAO.setCourse(studentDTO.getCourse());
         studentRepository.save(studentDAO);
+        return studentDAO.getNic();
     }
 
     @Override
@@ -37,8 +38,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudent(String nic) {
+    public String deleteStudent(String nic) {
         studentRepository.deleteById(nic);
+        return nic;
     }
 
     @Override
