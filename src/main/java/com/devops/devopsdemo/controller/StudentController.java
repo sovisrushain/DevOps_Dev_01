@@ -30,31 +30,33 @@ public class  StudentController {
     public ResponseEntity<String> saveStudent(@Valid @RequestBody  StudentDTO studentDTO, Errors errors) {
         logger.info("student controller class: post student - {}", studentDTO);
         if(errors.hasErrors()) {
+            logger.error("student controller class: validation errors occur during saving the student");
             return new ResponseEntity<>(Objects.requireNonNull(errors.getFieldError()).getDefaultMessage(), HttpStatus.BAD_REQUEST);
         } else {
             String nic = studentService.saveStudent(studentDTO);
+            logger.info("student controller class: save the student");
             return new ResponseEntity<>(nic, HttpStatus.OK);
         }
     }
 
     @GetMapping("/{nic}")
     public ResponseEntity<Optional<StudentDAO>> getStudent(@PathVariable String nic) {
-        logger.info("student controller class: get a student - {}", nic);
         Optional<StudentDAO> student = studentService.getStudentById(nic);
+        logger.info("student controller class: get the student of id - {} " , nic);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<Optional<List<StudentDAO>>> getAllStudents() {
-        logger.info("student controller class: get all students");
         Optional<List<StudentDAO>> studentList = studentService.getAllStudents();
+        logger.info("student controller class: get all students");
         return new ResponseEntity<>(studentList, HttpStatus.OK);
     }
 
     @DeleteMapping("/{nic}")
     public ResponseEntity<String> deleteStudent(@PathVariable String nic) {
-        logger.info("student controller class: get a student - {}", nic);
         String nicNum = studentService.deleteStudent(nic);
+        logger.info("student controller class: get a student - {}", nic);
         return new ResponseEntity<>(nicNum, HttpStatus.OK);
     }
 }
