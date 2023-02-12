@@ -4,6 +4,7 @@ import com.devops.devopsdemo.dao.StudentDAO;
 import com.devops.devopsdemo.dto.StudentDTO;
 import com.devops.devopsdemo.repository.StudentRepository;
 import com.devops.devopsdemo.util.NicCalc;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
 
     @Override

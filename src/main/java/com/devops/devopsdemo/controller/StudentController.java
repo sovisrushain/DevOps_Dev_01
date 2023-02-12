@@ -3,31 +3,38 @@ package com.devops.devopsdemo.controller;
 import com.devops.devopsdemo.dao.StudentDAO;
 import com.devops.devopsdemo.dto.StudentDTO;
 import com.devops.devopsdemo.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/students")
+@RequiredArgsConstructor
 public class  StudentController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
     @PostMapping
-    public ResponseEntity<String> saveStudent(@Valid @RequestBody  StudentDTO studentDTO) {
+    public ResponseEntity<String> saveStudent(@Valid @RequestBody  StudentDTO studentDTO, Errors errors) {
         logger.info("student controller class: post student - {}", studentDTO);
-        String nic = studentService.saveStudent(studentDTO);
-        return new ResponseEntity<>(nic, HttpStatus.OK);
+        if(errors.hasErrors()) {
+            return new ResponseEntity<>(Objects.requireNonNull(errors.getFieldError()).getDefaultMessage(), HttpStatus.BAD_REQUEST);
+        } else {
+            String nic = studentService.saveStudent(studentDTO);
+            return new ResponseEntity<>(nic, HttpStatus.OK);
+        }
     }
 
     @GetMapping("/{nic}")

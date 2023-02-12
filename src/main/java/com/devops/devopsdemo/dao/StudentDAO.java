@@ -27,7 +27,7 @@ public class StudentDAO {
     @Column(nullable = false)
     private String dob;
     @Column(nullable = false)
-    private int year;
+    private String year;
     @Column(nullable = false)
     private String course;
 }
