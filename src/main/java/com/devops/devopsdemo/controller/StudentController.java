@@ -53,6 +53,13 @@ public class  StudentController {
         return new ResponseEntity<>(studentList, HttpStatus.OK);
     }
 
+    @GetMapping("/search/{name}")
+    public ResponseEntity<Optional<List<StudentDAO>>> findStudentsByName(@PathVariable String name) {
+        Optional<List<StudentDAO>> students = studentService.findStudentsByName(name);
+        logger.info("student controller class: find students by name");
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{nic}")
     public ResponseEntity<String> deleteStudent(@PathVariable String nic) {
         String nicNum = studentService.deleteStudent(nic);

@@ -11,4 +11,5 @@ public interface StudentService {
     Optional<StudentDAO> getStudentById(String nic);
     String deleteStudent(String nic);
     Optional<List<StudentDAO>> getAllStudents();
+    Optional<List<StudentDAO>> findStudentsByName(String name);
 }

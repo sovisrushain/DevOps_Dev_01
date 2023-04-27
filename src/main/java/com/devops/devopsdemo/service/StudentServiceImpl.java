@@ -18,7 +18,6 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-
     @Override
     public String saveStudent(StudentDTO studentDTO) {
         Map<String, String> map = NicCalc.getDobAndGender(studentDTO.getNic());
@@ -48,5 +47,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Optional<List<StudentDAO>> getAllStudents() {
         return Optional.of(studentRepository.findAll());
+    }
+
+    @Override
+    public Optional<List<StudentDAO>> findStudentsByName(String name) {
+        return Optional.ofNullable(studentRepository.findByName(name));
     }
 }
