@@ -43,6 +43,7 @@ public class  StudentController {
     @PostMapping("/upload")
     public ResponseEntity<String> importExelData(@RequestParam("file")MultipartFile file) {
         String response = studentService.saveStudentsFromExel(file);
+        logger.info("student controller class: import student data and upload");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
