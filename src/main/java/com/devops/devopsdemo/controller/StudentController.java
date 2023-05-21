@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,6 +38,12 @@ public class  StudentController {
             logger.info("student controller class: save the student");
             return new ResponseEntity<>(nic, HttpStatus.OK);
         }
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> importExelData(@RequestParam("file")MultipartFile file) {
+        String response = studentService.saveStudentsFromExel(file);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{nic}")
