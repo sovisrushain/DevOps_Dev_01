@@ -7,5 +7,6 @@ target/
 *.iws
 *.iml
 *.ipr
+app.log
 
 
