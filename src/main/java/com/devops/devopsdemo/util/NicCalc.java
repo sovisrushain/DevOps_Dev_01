@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class NicCalc {
 
-    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+    private static final Logger logger = LoggerFactory.getLogger(NicCalc.class);
 
     static String year, month, date, gender = "Male";
     static int datesOfMonth[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -22,7 +22,6 @@ public class NicCalc {
         }else if (idNumber.length() == 12){
             newNIC(idNumber);
         }else {
-            System.out.println("Enter a valid ID number.\nEx :- 970000000V or 199700000000");
             logger.error("Enter a valid ID number.\nEx :- 970000000V or 199700000000");
         }
         map.put("dob", year + " " + month + " " + date);
